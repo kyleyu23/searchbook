@@ -9,7 +9,7 @@ import { books } from '../books';
 })
 export class WishlistComponent implements OnInit {
   wishlist: any = [];
-  wishlisttest: any = books;
+  // wishlisttest: any = books;
   constructor(private bookService: BookService) {}
 
   ngOnInit(): void {

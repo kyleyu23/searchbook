@@ -9,11 +9,11 @@ import { map, tap } from 'rxjs/operators';
 export class BookService {
   baseUrl = 'https://www.googleapis.com/books/v1/volumes?q=';
 
-  private books: any;
+  private books: any = [];
   private bookSbj$ = new Subject();
   books$ = this.bookSbj$.asObservable();
 
-  private wishlist: any;
+  private wishlist: any = [];
   private wishSbj$ = new Subject();
   wishlist$ = this.wishSbj$.asObservable();
 
@@ -45,15 +45,15 @@ export class BookService {
   }
 
   addToWishList(id: string) {
-    const book = this.books.find((book: any) => book.id === id);
+    const bookToAdd = this.books.find((book: any) => book.id === id);
     const inWishList = this.wishlist.find((book: any) => book.id === id);
-    if (!book || inWishList) return;
-    this.wishlist = [...this.wishlist, book];
+    if (!bookToAdd || inWishList) return;
+    this.wishlist = [...this.wishlist, bookToAdd];
     this.wishSbj$.next(this.wishlist);
   }
   deleteFromWishList(id: string) {
-    const book = this.books.find((book: any) => book.id === id);
-    if (!book) return;
+    const bookToDelte = this.books.find((book: any) => book.id === id);
+    if (!bookToDelte) return;
     this.wishlist = this.wishlist.filter((book: any) => book.id !== id);
     this.wishSbj$.next(this.wishlist);
   }

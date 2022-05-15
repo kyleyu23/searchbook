@@ -10,7 +10,7 @@ import { books } from '../books';
 export class BooklistComponent implements OnInit {
   // books: any = [];
   readonly books$: any = this.bookService.books$;
-  bookstest: any = books;
+  // bookstest: any = books;
 
   constructor(private bookService: BookService) {}
 

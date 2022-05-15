@@ -4,8 +4,8 @@
   fxLayoutGap="1rem"
   fxFlex="grow"
 >
-  <mat-card class="card" *ngFor="let book of bookstest">
-    <!-- <mat-card class="card" *ngFor="let book of books$ | async"> -->
+  <!-- <mat-card class="card" *ngFor="let book of bookstest"> -->
+  <mat-card class="card" *ngFor="let book of books$ | async">
     <mat-card-title-group>
       <mat-card-title
         (click)="addToWishList(book.id)"

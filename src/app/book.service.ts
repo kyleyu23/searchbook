@@ -9,11 +9,11 @@ import { map, tap } from 'rxjs/operators';
 export class BookService {
   baseUrl = 'https://www.googleapis.com/books/v1/volumes?q=';
 
-  private books: any = [];
+  private books: any;
   private bookSbj$ = new Subject();
   books$ = this.bookSbj$.asObservable();
 
-  private wishlist: any = [];
+  private wishlist: any;
   private wishSbj$ = new Subject();
   wishlist$ = this.wishSbj$.asObservable();
 
@@ -27,6 +27,10 @@ export class BookService {
           const arr = bookobj.items.map((obj: any) => {
             return {
               name: obj.volumeInfo.title,
+              publisher: obj.volumeInfo.publisher,
+              publishdate: obj.volumeInfo.publishdate,
+              description: obj.volumeInfo.description,
+              imgUrl: obj.volumeInfo.imageLinks.thumbnail,
               id: obj.id,
             };
           });

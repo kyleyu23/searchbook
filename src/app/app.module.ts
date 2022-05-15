@@ -10,14 +10,27 @@ import { HttpClientModule } from '@angular/common/http';
 import { InputboxComponent } from './inputbox/inputbox.component';
 import { MatInputModule } from '@angular/material/input';
 import { WishlistComponent } from './wishlist/wishlist.component';
+import { MatCardModule } from '@angular/material/card';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
 @NgModule({
-  declarations: [AppComponent, InputboxComponent, BooklistComponent, WishlistComponent],
+  declarations: [
+    AppComponent,
+    InputboxComponent,
+    BooklistComponent,
+    WishlistComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatInputModule,
     HttpClientModule,
+    MatCardModule,
+    FlexLayoutModule,
+    MatTooltipModule,
+    MatButtonModule,
   ],
   providers: [BookService],
   bootstrap: [AppComponent],

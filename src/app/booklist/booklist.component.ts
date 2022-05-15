@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../book.service';
+import { books } from '../books';
 
 @Component({
   selector: 'app-booklist',
@@ -7,16 +8,16 @@ import { BookService } from '../book.service';
   styleUrls: ['./booklist.component.scss'],
 })
 export class BooklistComponent implements OnInit {
-  books: any = [];
-  // books$: any;
+  // books: any = [];
+  readonly books$: any = this.bookService.books$;
+  bookstest: any = books;
 
   constructor(private bookService: BookService) {}
 
   ngOnInit(): void {
-    this.bookService.books$.subscribe((books: any) => {
-      this.books = books;
-      // this.books$ = this.bookService.books$;
-    });
+    // this.bookService.books$.subscribe((books: any) => {
+    //   this.books = books;
+    // });
   }
   addToWishList(id: string) {
     this.bookService.addToWishList(id);

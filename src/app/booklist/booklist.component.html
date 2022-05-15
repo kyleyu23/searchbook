@@ -1,0 +1,7 @@
+<h3>Books</h3>
+<ul>
+  <li *ngFor="let book of books" (click)="addToWishList(book.id)">
+    {{ book.name }}
+  </li>
+</ul>
+<!-- <li *ngFor="let book of books$ | async" (click)="addToWishList(book.id)"> -->

@@ -1,0 +1,7 @@
+<h3>Wish List</h3>
+<ul>
+  <li *ngFor="let book of wishlist">
+    <span>{{ book.name }}</span>
+    <button (click)="delete(book.id)">delete</button>
+  </li>
+</ul>

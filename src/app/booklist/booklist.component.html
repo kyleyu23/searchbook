@@ -4,11 +4,10 @@
   fxLayoutGap="1rem"
   fxFlex="grow"
 >
-  <!-- <mat-card class="card" *ngFor="let book of bookstest"> -->
-  <mat-card class="card" *ngFor="let book of books$ | async">
+  <mat-card class="card" *ngFor="let book of books">
     <mat-card-title-group>
       <mat-card-title
-        (click)="addToWishList(book.id)"
+        (click)="wishListChange.emit(book)"
         matTooltip="Add To Wishlist"
       >
         {{ book.name }}
@@ -24,7 +23,5 @@
     <mat-card-content>
       <p class="truncate">{{ book.description }}</p>
     </mat-card-content>
-
-    <!-- <li *ngFor="let book of books" (click)="addToWishList(book.id)"> -->
   </mat-card>
 </div>

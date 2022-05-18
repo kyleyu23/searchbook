@@ -1,6 +1,18 @@
 <h1>My Library</h1>
-<app-inputbox></app-inputbox>
+
+<app-inputbox (bookNameChange)="bookname$.next($event)"></app-inputbox>
+
 <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="1rem">
-  <app-booklist></app-booklist>
-  <app-wishlist></app-wishlist>
+  <!-- Bookname: {{ bookname$ | async }}
+  <pre><code>{{ books$ | async | json }}</code></pre> -->
+
+  <app-booklist
+    [books]="(books$ | async) ?? []"
+    (wishListChange)="addToWishList($event)"
+  ></app-booklist>
+
+  <app-wishlist
+    [wishList]="wishList"
+    (wishListChange)="deleteFromWishList($event)"
+  ></app-wishlist>
 </div>

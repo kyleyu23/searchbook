@@ -3,9 +3,9 @@
   <mat-list role="list">
     <mat-list-item
       role="listitem"
-      *ngFor="let book of wishlist"
+      *ngFor="let book of wishList"
       matTooltip="Remove"
-      (click)="delete(book.id)"
+      (click)="wishListChange.emit(book)"
       >{{ book.name }}
     </mat-list-item>
   </mat-list>

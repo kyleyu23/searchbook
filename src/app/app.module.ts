@@ -15,6 +15,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +25,7 @@ import { MatListModule } from '@angular/material/list';
     WishlistComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -33,6 +36,8 @@ import { MatListModule } from '@angular/material/list';
     MatTooltipModule,
     MatButtonModule,
     MatListModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [BookService],
   bootstrap: [AppComponent],

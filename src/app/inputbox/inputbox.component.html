@@ -1,4 +1,4 @@
-<mat-form-field appearance="fill">
+<mat-form-field appearance="fill" [formGroup]="mform">
   <mat-label>Search for a book</mat-label>
-  <input matInput placeholder="Ex. Javascript" value="" #inputbox />
+  <input matInput placeholder="Ex. Javascript" formControlName="bookname" />
 </mat-form-field>

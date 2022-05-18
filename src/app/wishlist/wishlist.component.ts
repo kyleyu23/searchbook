@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { BookService } from '../book.service';
-import { books } from '../books';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Book } from '../book.interface';
 
 @Component({
   selector: 'app-wishlist',
@@ -8,17 +7,8 @@ import { books } from '../books';
   styleUrls: ['./wishlist.component.scss'],
 })
 export class WishlistComponent implements OnInit {
-  wishlist: any = [];
-  // wishlisttest: any = books;
-  constructor(private bookService: BookService) {}
+  @Input() wishList: Book[] = [];
+  @Output() readonly wishListChange = new EventEmitter<Book>();
 
-  ngOnInit(): void {
-    this.bookService.wishlist$.subscribe((wishlist) => {
-      this.wishlist = wishlist;
-    });
-  }
-
-  delete(id: string) {
-    this.bookService.deleteFromWishList(id);
-  }
+  ngOnInit(): void {}
 }

@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { fromEvent } from 'rxjs';
-import { debounceTime, filter, tap } from 'rxjs/operators';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { debounceTime, map } from 'rxjs/operators';
 import { BookService } from '../book.service';
 
 @Component({
@@ -8,25 +8,27 @@ import { BookService } from '../book.service';
   templateUrl: './inputbox.component.html',
   styleUrls: ['./inputbox.component.scss'],
 })
-export class InputboxComponent implements OnInit {
-  @ViewChild('inputbox', { static: true })
-  inputbox!: ElementRef;
+export class InputboxComponent implements OnDestroy {
+  @Output() readonly bookNameChange = new EventEmitter<string>();
 
-  constructor(private bookservice: BookService) {}
+  private readonly booknameControl = new FormControl();
 
-  ngOnInit(): void {
-    fromEvent(this.inputbox.nativeElement, 'keyup')
-      .pipe(
-        debounceTime(500),
-        filter((_) => {
-          const keyword = this.inputbox.nativeElement.value;
-          return keyword.trim();
-        }),
-        tap((_) => {
-          const keyword = this.inputbox.nativeElement.value.trim();
-          this.bookservice.getBooks(keyword);
-        })
-      )
-      .subscribe();
+  mform: FormGroup = new FormGroup({
+    bookname: this.booknameControl,
+  });
+
+  private readonly subscription = this.booknameControl.valueChanges
+    .pipe(
+      debounceTime(500),
+      map(() => this.booknameControl.value)
+    )
+    .subscribe((bookname: string) => {
+      this.bookNameChange.emit(bookname);
+    });
+
+  constructor(private readonly bookservice: BookService) {}
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

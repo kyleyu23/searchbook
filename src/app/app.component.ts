@@ -1,11 +1,6 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
-import { debounceTime, filter, fromEvent, switchMap } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { switchMap, Subject } from 'rxjs';
+import { Book } from './book.interface';
 import { BookService } from './book.service';
 
 @Component({
@@ -14,9 +9,37 @@ import { BookService } from './book.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'searchbook';
+  // scalar
+  readonly title = 'searchbook';
+  wishList: Book[] = [];
 
-  constructor() {}
+  // stream
+  readonly bookname$ = new Subject<string>();
+
+  readonly books$ = this.bookname$.pipe(
+    switchMap((bookname) => {
+      return this.bookService.getBooks(bookname);
+    })
+  );
+
+  constructor(private bookService: BookService) {}
 
   ngOnInit(): void {}
+
+  addToWishList(book: Book): void {
+    // const isInWishList2: boolean = this.wishList.includes(book);
+    const isInWishList: boolean = this.wishList.some(
+      (bookToAdd) => bookToAdd.id === book.id
+    );
+
+    if (!isInWishList) {
+      this.wishList = [...this.wishList, book];
+    }
+  }
+
+  deleteFromWishList(book: Book): void {
+    this.wishList = this.wishList.filter(
+      (bookToDelete) => bookToDelete.id !== book.id
+    );
+  }
 }

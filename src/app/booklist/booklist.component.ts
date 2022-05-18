@@ -1,25 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { BookService } from '../book.service';
-import { books } from '../books';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Book } from '../book.interface';
 
 @Component({
   selector: 'app-booklist',
   templateUrl: './booklist.component.html',
   styleUrls: ['./booklist.component.scss'],
 })
-export class BooklistComponent implements OnInit {
-  // books: any = [];
-  readonly books$: any = this.bookService.books$;
-  // bookstest: any = books;
-
-  constructor(private bookService: BookService) {}
-
-  ngOnInit(): void {
-    // this.bookService.books$.subscribe((books: any) => {
-    //   this.books = books;
-    // });
-  }
-  addToWishList(id: string) {
-    this.bookService.addToWishList(id);
-  }
+export class BooklistComponent {
+  @Input() books: Book[] = [];
+  @Output() readonly wishListChange = new EventEmitter<Book>();
 }
